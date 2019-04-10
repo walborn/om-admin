@@ -1,0 +1,21 @@
+{
+  "main.css": "/om-admin/static/css/main.777541b5.chunk.css",
+  "main.js": "/om-admin/static/js/main.38a8c059.chunk.js",
+  "main.js.map": "/om-admin/static/js/main.38a8c059.chunk.js.map",
+  "runtime~main.js": "/om-admin/static/js/runtime~main.f5c6aa78.js",
+  "runtime~main.js.map": "/om-admin/static/js/runtime~main.f5c6aa78.js.map",
+  "static/css/2.f9a53a44.chunk.css": "/om-admin/static/css/2.f9a53a44.chunk.css",
+  "static/js/2.1f24821f.chunk.js": "/om-admin/static/js/2.1f24821f.chunk.js",
+  "static/js/2.1f24821f.chunk.js.map": "/om-admin/static/js/2.1f24821f.chunk.js.map",
+  "index.html": "/om-admin/index.html",
+  "precache-manifest.b2702123801102df688081b6751866e5.js": "/om-admin/precache-manifest.b2702123801102df688081b6751866e5.js",
+  "service-worker.js": "/om-admin/service-worker.js",
+  "static/css/2.f9a53a44.chunk.css.map": "/om-admin/static/css/2.f9a53a44.chunk.css.map",
+  "static/css/main.777541b5.chunk.css.map": "/om-admin/static/css/main.777541b5.chunk.css.map",
+  "static/media/duplicate.a9d0220a.svg": "/om-admin/static/media/duplicate.a9d0220a.svg",
+  "static/media/loading.6b2f87a4.svg": "/om-admin/static/media/loading.6b2f87a4.svg",
+  "static/media/ok.b31fdba0.svg": "/om-admin/static/media/ok.b31fdba0.svg",
+  "static/media/plus.31dcaf2f.svg": "/om-admin/static/media/plus.31dcaf2f.svg",
+  "static/media/rip.791535bd.svg": "/om-admin/static/media/rip.791535bd.svg",
+  "static/media/trash.63ff7ef8.svg": "/om-admin/static/media/trash.63ff7ef8.svg"
+}
