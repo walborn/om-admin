@@ -1,0 +1,14 @@
+.page-signin {
+  form {
+    width: 300px;
+    margin: 0 auto;
+    > * {
+      margin-top: 10px;
+    }
+    > .error {
+      color: #ff596d;
+      text-align: center;
+      font-size: 12px;
+    }
+  }
+}

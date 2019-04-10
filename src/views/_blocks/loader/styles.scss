@@ -1,0 +1,35 @@
+@import 'src/assets/styles/constants.scss';
+
+.loader {
+    > div {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1001;
+        background: radial-gradient(rgba(255,255,255,1) 16%,rgba(255,255,255,0.5) 100%);
+        > div {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        p {
+            color: $color-gray;
+        }
+    }
+    svg {
+        height: 32px;
+        vertical-align: middle;
+    }
+}
+//
+//@keyframes circle {
+//    from { transform:rotate(0deg); }
+//    to { transform:rotate(360deg); }
+//}
+//#loader-circle {
+//    transform-origin: 17px 17px 0;
+//    animation: circle 0.5s linear infinite;
+//}
