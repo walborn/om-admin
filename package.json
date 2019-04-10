@@ -2,7 +2,7 @@
   "name": "om-admin",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://walborn.pro",
+  "homepage": "https://walborn.github.io/om-admin",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "history": "^4.7.2",
