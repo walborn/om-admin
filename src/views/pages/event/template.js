@@ -17,10 +17,10 @@ const compare = (a, b) => {
 
     if (A < B) return -1;
     if (A > B) return 1;
-    if (a.time > b.time) return -1;
-    if (a.time < b.time) return 1;
-    if (a.duration > b.duration) return -1;
-    if (a.duration < b.duration) return 1;
+    if (a.time < b.time) return -1;
+    if (a.time > b.time) return 1;
+    if (a.duration < b.duration) return -1;
+    if (a.duration > b.duration) return 1;
     return 0;
 };
 
