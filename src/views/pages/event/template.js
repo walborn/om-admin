@@ -5,19 +5,18 @@ import isEqual from 'lodash.isequal';
 import { ReactComponent as DeleteSVG } from 'src/assets/svg/trash.svg';
 import { ReactComponent as CreateSVG } from 'src/assets/svg/plus.svg';
 import { ReactComponent as DuplicateSVG } from 'src/assets/svg/duplicate.svg';
+import { ReactComponent as DisableSVG } from 'src/assets/svg/disabled.svg';
+import { ReactComponent as UnDisableSVG } from 'src/assets/svg/undisabled.svg';
 import 'react-datepicker/dist/react-datepicker.css';
 import './styles.scss';
 
 const toDate = x => new Date(...(([ d, m, y ]) => [ +y, +m-1, +d ])(x.split('.')));
 const compare = (a, b) => {
-    const [ dA, mA, yA ] = a.date.split('.');
-    const [ dB, mB, yB ] = b.date.split('.');
-    if (yA < yB) return -1;
-    if (yA > yB) return 1;
-    if (mA < mB) return 1;
-    if (mA > mB) return 1;
-    if (dA < dB) return -1;
-    if (dA > dB) return 1;
+    const A = +a.date.split('.').reverse().join('');
+    const B = +b.date.split('.').reverse().join('');
+
+    if (A < B) return -1;
+    if (A > B) return 1;
     if (a.time > b.time) return -1;
     if (a.time < b.time) return 1;
     if (a.duration > b.duration) return -1;
@@ -27,7 +26,8 @@ const compare = (a, b) => {
 
 export default class Event extends React.Component {
     state = {
-        list: this.props.list,
+        list: this.props.list.sort(compare),
+        disabled: true,
         fakeId: 0,
     };
     componentDidMount() {
@@ -37,59 +37,76 @@ export default class Event extends React.Component {
     componentWillReceiveProps(nextProps) {
         const { list } = nextProps;
         if (Array.isArray(list) && !isEqual(list, this.props.list)) {
-            this.setState({ list: list.sort(compare) });
+            this.setState({ list: list.sort(compare), disabled: true });
         }
     }
     handleChange = id => name => ({ value }) => {
-        const {list} = this.state;
+        const { list } = this.state;
         const i = list.findIndex(item => item.id === id);
-        this.setState({
-            list:
-                [
-                    ...list.slice(0, i),
-                    {...list[i], [name]: value},
-                    ...list.slice(i + 1),
-                ]
-        }, () => console.log(this.state.list));
+        const nextList = [ ...list.slice(0, i), { ...list[i], [name]: value }, ...list.slice(i + 1) ];
+        const disabled = isEqual(nextList, this.props.list);
+        this.setState({ list: nextList, disabled });
     };
 
-    handleSubmit = () => {
-        console.log('submit');
-        const { list } = this.state;
-        this.props.list.map(item => {
-            const newItem = list.find(({ id }) => item.id === id);
-            if (!newItem) return this.props.deleteItem(item.id);
-            if (!isEqual(newItem, item)) return this.props.updateItem(newItem);
-        });
-        list.filter(i => typeof i.id === 'number').forEach(item => this.props.createItem(item));
-    };
     handleCreate = () => {
         const { list, fakeId } = this.state;
-        const emptyItem = { date: new Date().toLocaleDateString('ru'), type: '', time: '', duration: '', name: '', alternate: '', master: '', level: '', room: '', disabled: false, id: fakeId + 1 };
-        this.setState({ fakeId: fakeId + 1, list: [ ...list, emptyItem ]});
+        const emptyItem = {
+            date: new Date().toLocaleDateString('ru'),
+            id: fakeId + 1,
+            disabled: 'false',
+            type: '', time: '', duration: '', name: '', alternate: '', master: '', level: '', room: '', };
+        this.setState({ fakeId: fakeId + 1, list: [ ...list, emptyItem ], disabled: false });
     };
+
     handleDelete = id => () => {
         const { list } = this.state;
         const i = list.findIndex(item => item.id === id);
-        this.setState({ list: [ ...list.slice(0, i), ...list.slice(i + 1) ] }); //, () => this.props.deleteItem(id));
+        const nextList = [ ...list.slice(0, i), ...list.slice(i + 1) ];
+        const disabled = isEqual(nextList, this.props.list);
+
+        this.setState({ list: nextList, disabled });
     };
+
     handleDuplicate = item => () => {
         const { list, fakeId } = this.state;
         const i = list.findIndex(({ id }) => item.id === id);
-        const newList = [ ...list.slice(0, i + 1), { ...item, id: fakeId + 1 }, ...list.slice(i + 1) ];
-        this.setState({ fakeId: fakeId + 1, list: newList });
+        const nextList = [ ...list.slice(0, i + 1), { ...item, id: fakeId + 1 }, ...list.slice(i + 1) ];
+        const disabled = isEqual(nextList, this.props.list);
+
+        this.setState({ fakeId: fakeId + 1, list: nextList, disabled });
+    };
+
+    handleSubmit = () => {
+        const prevList = this.props.list.reduce((res, i) => ({ ...res, [i.id]: i }), {});
+        const nextList = this.state.list.reduce((res, i) => ({ ...res, [i.id]: i }), {});
+        this.setState({ disabled: true });
+        Promise.all(
+            [
+                ...Object.keys(prevList).map(id => {
+                    const nextItem = nextList[id];
+                    if (!nextItem) return this.props.deleteItem(id);
+                    if (!isEqual(nextItem, prevList[id])) this.props.updateItem(nextItem);
+                }),
+                ...Object.keys(nextList).filter(id => !prevList[id]).map(id => this.props.createItem(nextList[id])),
+            ]
+        ).then(this.props.fetchList);
     };
 
     render() {
-        const { list } = this.state;
+        const { list, disabled } = this.state;
         return (
             <div id="event-list">
                 {
                     list.map((i) => (
-                        <div key={i.id} className="item">
+                        <div key={i.id} className={`item${i.disabled === 'true' ? ' disabled' : ''}`}>
                             <div className="card">
                                 <DeleteSVG className="delete" onClick={this.handleDelete(i.id)} />
                                 <DuplicateSVG className="duplicate" onClick={this.handleDuplicate(i)} />
+                                {
+                                    i.disabled === 'true'
+                                        ? <DisableSVG className="disable" onClick={() => this.handleChange(i.id)('disabled')({ value: 'false' })}/>
+                                        : <UnDisableSVG className="disable" onClick={() => this.handleChange(i.id)('disabled')({ value: 'true' })}/>
+                                }
                                 <div className="card__field">
                                     <DatePicker
                                         selected={toDate(i.date)}
@@ -116,7 +133,7 @@ export default class Event extends React.Component {
                 <div className="create">
                     <div onClick={this.handleCreate}><CreateSVG/></div>
                 </div>
-                <div className="submit"><Button onClick={this.handleSubmit} green disabled={isEqual(list, this.props.list)}>Submit</Button></div>
+                <div className="submit"><Button onClick={this.handleSubmit} green disabled={disabled}>Submit</Button></div>
             </div>
         );
     }

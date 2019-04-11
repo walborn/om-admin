@@ -2,7 +2,7 @@
   "name": "om-admin",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://walborn.github.io/om-admin",
+  "homepage": "https://walborn.github.io",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "history": "^4.7.2",
@@ -25,8 +25,8 @@
   },
   "scripts": {
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
+    "deploy": "gh-pages -b master -d build",
+    "start": "PORT=3030 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -43,6 +43,5 @@
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0"
-  },
-  "proxy": "https://selftest-app.herokuapp.com"
+  }
 }
