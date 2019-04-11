@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
-import CheckBoxItem from '../item';
+import CheckBoxItem from '../item/index';
 import './styles.scss';
 
 

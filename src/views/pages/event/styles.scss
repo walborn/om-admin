@@ -40,11 +40,6 @@ $MAX_INT: 2147483647;
     padding: 10px;
 
     vertical-align: top;
-    &.disabled {
-      .input > input {
-        color: $color-gray--light;
-      }
-    }
     .card {
       position: relative;
       box-sizing: border-box;
@@ -72,17 +67,6 @@ $MAX_INT: 2147483647;
         cursor: pointer;
         opacity: .5;
         width: 16px;
-        &:hover {
-          opacity: .9;
-        }
-      }
-      .disable {
-        position: absolute;
-        top: 10px;
-        right: 70px;
-        cursor: pointer;
-        opacity: .5;
-        width: 22px;
         &:hover {
           opacity: .9;
         }

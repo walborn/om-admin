@@ -1,4 +1,4 @@
-import NotFound from './notfound';
+import NotFound from './notfound/index';
 import Event from './event/index';
 import Feedback from './feedback/index';
 import User from './user/index';

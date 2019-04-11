@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import { apiMiddleware } from 'redux-api-middleware';
-import reducers from '../reducers';
+import reducers from '../reducers/index';
 import apiMiddlewareBefore from './middlewares/api';
 import logger from './middlewares/logger';
 
