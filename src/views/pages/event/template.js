@@ -12,6 +12,7 @@ import { ReactComponent as ArrowSVG } from 'src/assets/svg/arrow.svg';
 import 'react-datepicker/dist/react-datepicker.css';
 import './styles.scss';
 
+const WEEKDAYS = [ 'Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб' ];
 const toDate = x => new Date(...(([ d, m, y ]) => [ +y, +m-1, +d ])(x.split('.')));
 const compare = (a, b) => {
     const A = +a.date.split('.').reverse().join('');
@@ -117,7 +118,9 @@ export default class Event extends React.Component {
                     Object.entries(matrix).map(([ date, classes ]) => (
                         <div key={date} className={[ 'wrapper', opened[date] && 'opened'].filter(Boolean).join(' ')}>
                             <div className="date" onClick={this.handleOpenDate(date)}>
-                                {date} ({classes.length})
+                                <span className="date__weekday">{WEEKDAYS[toDate(date).getDay()]}</span>
+                                <span className="date__date">{date}</span>
+                                <span className="date__length">{classes.length}</span>
                                 <ArrowSVG className="arrow" />
                             </div>
 

@@ -42,6 +42,23 @@ $MAX_INT: 2147483647;
       box-shadow: $box-shadow;
       border-radius: 6px;
       cursor: pointer;
+      &__weekday {
+        display: inline-block;
+        vertical-align: middle;
+        width: 50px;
+        color: $color-gitbook-green--hover;
+      }
+      &__date {
+        display: inline-block;
+        vertical-align: middle;
+        color: $color-gray--darken;
+      }
+      &__length {
+        display: inline-block;
+        vertical-align: middle;
+        width: 50px;
+        color: $color-blue;
+      }
       .arrow {
         position: absolute;
         width: 16px;
