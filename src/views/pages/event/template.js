@@ -110,7 +110,7 @@ export default class Event extends React.Component {
     handleOpenDate = date => () => this.setState({ opened: { ...this.state.opened, [date]: !this.state.opened[date] } });
 
     render() {
-        const { matrix, opened, disabled } = this.state;
+        const { list, matrix, opened, disabled } = this.state;
 
         return (
             <div id="event-list">
@@ -162,9 +162,13 @@ export default class Event extends React.Component {
                         </div>
                     ))
                 }
-                <div className="create">
-                    <div onClick={this.handleCreate}><CreateSVG/></div>
-                </div>
+                {
+                    !list.length && (
+                        <div className="create">
+                            <div onClick={this.handleCreate}><CreateSVG/></div>
+                        </div>
+                    )
+                }
                 <div className="submit"><button onClick={this.handleSubmit} disabled={disabled}><SubmitSVG /></button></div>
             </div>
         );
