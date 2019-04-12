@@ -7,6 +7,7 @@ import { ReactComponent as CreateSVG } from 'src/assets/svg/plus.svg';
 import { ReactComponent as DuplicateSVG } from 'src/assets/svg/duplicate.svg';
 import { ReactComponent as DisableSVG } from 'src/assets/svg/disabled.svg';
 import { ReactComponent as UnDisableSVG } from 'src/assets/svg/undisabled.svg';
+import { ReactComponent as SubmitSVG } from 'src/assets/svg/submit.svg';
 import 'react-datepicker/dist/react-datepicker.css';
 import './styles.scss';
 
@@ -132,7 +133,7 @@ export default class Event extends React.Component {
                 <div className="create">
                     <div onClick={this.handleCreate}><CreateSVG/></div>
                 </div>
-                <div className="submit"><Button onClick={this.handleSubmit} green disabled={disabled}>Submit</Button></div>
+                <div className="submit"><button onClick={this.handleSubmit} disabled={disabled}><SubmitSVG /></button></div>
             </div>
         );
     }
