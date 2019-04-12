@@ -5,10 +5,10 @@
   padding: 0 20px;
   color: $color-font__lighten;
   :hover {
-    color: $color-orange;
+    color: $color-gitbook-green--hover;
   }
   &--active {
-    color: $color-orange;
+    color: $color-gitbook-green--hover;
     font-weight: bold;
   }
 }

@@ -6,7 +6,7 @@ $MAX_INT: 2147483647;
 #header {
   .menu {
     position: relative;
-    height: 40px;
+    height: 44px;
     background: $color-background;
     box-shadow: $box-shadow;
     &__item {
@@ -15,7 +15,7 @@ $MAX_INT: 2147483647;
       padding: 10px;
       a {
         text-decoration: none;
-        color: $color-orange;
+        color: $color-gitbook-green--hover;
       }
       &--active {
         a {

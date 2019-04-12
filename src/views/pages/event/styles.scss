@@ -150,7 +150,7 @@ $MAX_INT: 2147483647;
       white-space: nowrap;
       justify-content: center;
       -webkit-box-pack: center;
-      background-color: rgb(38, 203, 124);
+      background-color: $color-gitbook-green;
       -webkit-box-align: center;
       border-width: 1px;
       border-style: solid;
@@ -162,7 +162,7 @@ $MAX_INT: 2147483647;
       text-decoration: none;
       transition: all 250ms ease-out 0s;
       &:hover {
-        background-color: rgb(32, 184, 111);
+        background-color: $color-gitbook-green--hover;
       }
       &:disabled {
         display: none;
