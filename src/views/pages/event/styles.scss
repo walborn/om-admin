@@ -89,6 +89,7 @@ $MAX_INT: 2147483647;
         margin-bottom: 10px;
         &--date {
           display: inline-block;
+          vertical-align: top;
           width: 110px;
           > * {
             padding-right: 10px;
@@ -96,7 +97,13 @@ $MAX_INT: 2147483647;
         }
         &--time {
           display: inline-block;
-          width: calc(100% - 110px);
+          vertical-align: top;
+          width: calc(100% - 180px);
+        }
+        &--duration {
+          display: inline-block;
+          vertical-align: top;
+          width: 70px;
         }
       }
       .delete {

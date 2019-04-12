@@ -56,7 +56,7 @@ export default class TimeInput extends React.PureComponent {
     handleFocus = () => this.$input.setSelectionRange(0, 5);
 
     handleKeyDown = (e) => {
-        if ([ 37, 39 ].includes(e.keyCode)) return;
+        if ([ 9/*tab*/, 37/*left*/, 39/*right*/ ].includes(e.keyCode)) return;
 
         e.preventDefault();
         const { value } = this.state;

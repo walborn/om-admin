@@ -90,17 +90,18 @@ export default class Event extends React.Component {
     };
 
     handleSubmit = () => {
+        this.setStateWithList({ disabled: true });
         const prevList = this.props.list.reduce((res, i) => ({ ...res, [i.id]: i }), {});
         const nextList = this.state.list.reduce((res, i) => ({ ...res, [i.id]: i }), {});
-        this.setStateWithList({ disabled: true });
+        const del = Object.keys(prevList).filter(id => !nextList[id]);
+        const upd = Object.keys(prevList).filter(id => nextList[id] && !isEqual(nextList[id], prevList[id]));
+        const crt = Object.keys(nextList).filter(id => !prevList[id]);
+
         Promise.all(
             [
-                ...Object.keys(prevList).map(id => {
-                    const nextItem = nextList[id];
-                    if (!nextItem) return this.props.deleteItem(id);
-                    if (!isEqual(nextItem, prevList[id])) return this.props.updateItem(nextItem);
-                }).filter(Boolean),
-                ...Object.keys(nextList).filter(id => !prevList[id]).map(id => this.props.createItem(nextList[id])),
+                ...del.map(id => this.props.deleteItem(id)),
+                ...upd.map(id => this.props.updateItem(nextList[id])),
+                ...crt.map(id => this.props.createItem(nextList[id])),
             ]
         ).then(this.props.fetchList);
     };
@@ -144,8 +145,8 @@ export default class Event extends React.Component {
                                                     />
                                                 </div>
                                                 <TimeInput className="card__field card__field--time" placeholder="Time" title="time" value={i.time} onChange={this.handleChange(i.id)('time')}/>
+                                                <Input className="card__field card__field--duration" placeholder="min" title="" value={i.duration} onChange={this.handleChange(i.id)('duration')} maxLength={3}/>
                                                 <Input className="card__field" placeholder="Type" title="type" value={i.type} onChange={this.handleChange(i.id)('type')}/>
-                                                <Input className="card__field" placeholder="Duration" title="duration" value={i.duration} onChange={this.handleChange(i.id)('duration')}/>
                                                 <Input className="card__field" placeholder="Title" title="title" value={i.name} onChange={this.handleChange(i.id)('name')}/>
                                                 <Input className="card__field" placeholder="Alternate" title="alternate" value={i.alternate} onChange={this.handleChange(i.id)('alternate')}/>
                                                 <Input className="card__field" placeholder="Master" title="master" value={i.master} onChange={this.handleChange(i.id)('master')}/>
