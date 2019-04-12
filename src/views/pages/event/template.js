@@ -1,6 +1,6 @@
 import React  from 'react';
 import DatePicker from 'react-datepicker';
-import { Input, Button } from 'src/views/_blocks/index';
+import { Input, Button, TimeInput } from 'src/views/_blocks/index';
 import isEqual from 'lodash.isequal';
 import { ReactComponent as DeleteSVG } from 'src/assets/svg/trash.svg';
 import { ReactComponent as CreateSVG } from 'src/assets/svg/plus.svg';
@@ -17,10 +17,10 @@ const compare = (a, b) => {
 
     if (A < B) return -1;
     if (A > B) return 1;
-    if (a.time < b.time) return -1;
-    if (a.time > b.time) return 1;
-    if (a.duration < b.duration) return -1;
-    if (a.duration > b.duration) return 1;
+    if (+a.time < +b.time) return -1;
+    if (+a.time > +b.time) return 1;
+    if (+a.duration < +b.duration) return -1;
+    if (+a.duration > +b.duration) return 1;
     return 0;
 };
 
@@ -107,7 +107,7 @@ export default class Event extends React.Component {
                                         ? <DisableSVG className="disable" onClick={() => this.handleChange(i.id)('disabled')({ value: 'false' })}/>
                                         : <UnDisableSVG className="disable" onClick={() => this.handleChange(i.id)('disabled')({ value: 'true' })}/>
                                 }
-                                <div className="card__field">
+                                <div className="card__field card__field--date">
                                     <DatePicker
                                         selected={toDate(i.date)}
                                         onChange={(date) => {
@@ -118,8 +118,8 @@ export default class Event extends React.Component {
                                         dateFormat="dd.MM.yy"
                                     />
                                 </div>
+                                <TimeInput className="card__field card__field--time" placeholder="Time" title="time" value={i.time} onChange={this.handleChange(i.id)('time')}/>
                                 <Input className="card__field" placeholder="Type" title="type" value={i.type} onChange={this.handleChange(i.id)('type')}/>
-                                <Input className="card__field" placeholder="Time" title="time" value={i.time} onChange={this.handleChange(i.id)('time')}/>
                                 <Input className="card__field" placeholder="Duration" title="duration" value={i.duration} onChange={this.handleChange(i.id)('duration')}/>
                                 <Input className="card__field" placeholder="Title" title="title" value={i.name} onChange={this.handleChange(i.id)('name')}/>
                                 <Input className="card__field" placeholder="Alternate" title="alternate" value={i.alternate} onChange={this.handleChange(i.id)('alternate')}/>

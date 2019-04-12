@@ -54,6 +54,17 @@ $MAX_INT: 2147483647;
 
       &__field {
         margin-bottom: 10px;
+        &--date {
+          display: inline-block;
+          width: 110px;
+          > * {
+            padding-right: 10px;
+          }
+        }
+        &--time {
+          display: inline-block;
+          width: calc(100% - 110px);
+        }
       }
       .delete {
         position: absolute;

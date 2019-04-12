@@ -27,7 +27,7 @@ export const signIn = ({ email, password }) => ({
     [RSAA]: {
         endpoint: '/auth',
         method: 'POST',
-        body: { access_token: 'J0q4RRrnqc53g7IfFrVNiiThKRny27B6' },
+        body: { access_token: process.env.REACT_APP_MASTER_KEY },
         headers: { Authorization: `Basic ${btoa(`${email}:${password}`)}` },
         types: [ SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE ],
     },
@@ -45,6 +45,3 @@ export const signUp = body => ({
 export const signOut = () => ({
     type: SIGNOUT,
 });
-
-
-// heroku config:set MASTER_KEY=GymNA7sOoG2JVofgNNnmQqrwnQg6gaD5 JWT_SECRET=C637MADv6eOUOIdNqmPe7oJ2YVFA4W98
