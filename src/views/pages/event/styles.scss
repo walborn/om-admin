@@ -30,8 +30,41 @@ $MAX_INT: 2147483647;
   }
 }
 #event-list {
-  .list {
-
+  .wrapper {
+    text-align: center;
+    .date {
+      position: relative;
+      text-align: center;
+      display: inline-block;
+      padding: 15px 50px 15px 20px;
+      margin: 5px;
+      box-sizing: border-box;
+      box-shadow: $box-shadow;
+      border-radius: 6px;
+      cursor: pointer;
+      .arrow {
+        position: absolute;
+        width: 16px;
+        opacity: .5;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%) rotate(180deg);
+        &:hover {
+          opacity: .8;
+        }
+      }
+    }
+    .list {
+      display: none;
+    }
+    &.opened {
+      > .list {
+        display: block;
+      }
+      .arrow {
+        transform: translateY(-50%) rotate(90deg);
+      }
+    }
   }
   .item {
     display: inline-block;
