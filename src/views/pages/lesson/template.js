@@ -128,14 +128,14 @@ export default class Lesson extends React.Component {
                             <div className="list">
                                 {
                                     lessons.map((i) => (
-                                        <div key={i.id} className={[ 'item', i.disabled && 'disabled' ].filter(Boolean).join(' ')}>
+                                        <div key={i.id} className={[ 'item', i.hidden && 'hidden' ].filter(Boolean).join(' ')}>
                                             <div className="card">
                                                 <DeleteSVG className="delete" onClick={this.handleDelete(i.id)} />
                                                 <DuplicateSVG className="duplicate" onClick={this.handleDuplicate(i)} />
                                                 {
-                                                    i.disabled
-                                                        ? <DisableSVG className="disable" onClick={() => this.handleChange(i.id)('disabled')({ value: false })}/>
-                                                        : <UnDisableSVG className="disable" onClick={() => this.handleChange(i.id)('disabled')({ value: true })}/>
+                                                    i.hidden
+                                                        ? <DisableSVG className="hidden" onClick={() => this.handleChange(i.id)('hidden')({ value: false })}/>
+                                                        : <UnDisableSVG className="hidden" onClick={() => this.handleChange(i.id)('hidden')({ value: true })}/>
                                                 }
                                                 <div className="card__field card__field--day">
                                                     <DropDown list={weekdays} selected={`${day}`} onChange={({ key }) => this.handleChange(i.id)('day')({ value: +key })} />
@@ -147,6 +147,7 @@ export default class Lesson extends React.Component {
                                                 <Input className="card__field" placeholder="Alternate" title="alternate" value={i.alternate} onChange={this.handleChange(i.id)('alternate')}/>
                                                 <Input className="card__field" placeholder="Master" title="master" value={i.master} onChange={this.handleChange(i.id)('master')}/>
                                                 <Input className="card__field" placeholder="Level" title="level" value={i.level} onChange={this.handleChange(i.id)('level')}/>
+                                                <Input className="card__field" placeholder="Note" title="note" value={i.note} onChange={this.handleChange(i.id)('note')} />
                                             </div>
                                         </div>
                                     ))
