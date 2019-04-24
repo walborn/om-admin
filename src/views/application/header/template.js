@@ -37,7 +37,7 @@ export default class Header extends React.Component {
         const { active } = this.state;
 
         const menu = [
-            { key: 'event', to: '/event', name: 'Events' },
+            { key: 'lesson', to: '/lesson', name: 'Lesson' },
             { key: 'feedback', to: '/feedback', name: 'Feedbacks' },
             { key: 'signin', to: '/auth/signin', name: 'Sign In', hidden: me.id },
             { key: 'signout', to: '/auth/signin', name: 'Sign Out', onClick: signOut, hidden: !me.id },

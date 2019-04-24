@@ -12,7 +12,7 @@ export default class Application extends React.Component {
                 <Header />
                 <main className="main">
                     <Switch>
-                        <Route exact path="/event" component={Pages.Event} />
+                        <Route exact path="/lesson" component={Pages.Lesson} />
                         <Route exact path="/feedback" component={Pages.Feedback} />
                         <Route path="/auth" component={Pages.Auth} />
                         <Route path="/user" component={Pages.User} />
