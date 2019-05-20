@@ -42,8 +42,11 @@ export default class Lesson extends React.Component {
     }
     componentDidMount() {
         window.scrollTo(0, 0);
-        this.props.fetchList();
+        let offset = 0;
+        const limit = 100;
+        this.props.fetchList({ offset, limit })
     }
+
     componentWillReceiveProps(nextProps) {
         const { list } = nextProps;
         if (Array.isArray(list) && !isEqual(list, this.props.list)) {

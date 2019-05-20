@@ -10,7 +10,7 @@ export default store => next => (action) => {
         rsaa.endpoint = `${process.env.REACT_APP_API}${rsaa.endpoint}`;
         rsaa.headers = { 'Content-Type': 'application/json', ...rsaa.headers };
         if ([ 'DELETE', 'PUT', 'POST' ].includes(rsaa.method)) { rsaa.body = JSON.stringify({ access_token, ...rsaa.body }); }
-        if (rsaa.method === 'GET') rsaa.endpoint = `${rsaa.endpoint}${stringify({ access_token })}`;
+        if (rsaa.method === 'GET') rsaa.endpoint = `${rsaa.endpoint}${stringify({ access_token, ...(rsaa.options || {}) })}`;
     }
 
     return next(action);

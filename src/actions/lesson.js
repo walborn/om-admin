@@ -21,10 +21,11 @@ export const DEL_SUCCESS = '@@lesson/DEL_SUCCESS';
 export const DEL_FAILURE = '@@lesson/DEL_FAILURE';
 
 
-export const list = params => ({
+export const list = options => ({
     [RSAA]: {
         endpoint: '/lessons',
         method: 'GET',
+        options,
         types: [ LIST_REQUEST, LIST_SUCCESS, LIST_FAILURE ],
     },
 });
